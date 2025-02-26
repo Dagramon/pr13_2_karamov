@@ -165,13 +165,20 @@ namespace pr13_2_karamov
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            if (textBox1.Text != string.Empty && textBox2.Text != string.Empty && textBox5.Text != string.Empty)
             {
-                addStudent(textBox1.Text, textBox2.Text, Convert.ToInt32(numericUpDown2.Value), Convert.ToInt32(numericUpDown1.Value), textBox5.Text);
+                try
+                {
+                    addStudent(textBox1.Text, textBox2.Text, Convert.ToInt32(numericUpDown2.Value), Convert.ToInt32(numericUpDown1.Value), textBox5.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Неверный формат данных");
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show("Неверный формат данных");
+                MessageBox.Show("Все поля должны быть заполнены");
             }
         }
         private void УдалитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -192,16 +199,23 @@ namespace pr13_2_karamov
         }
         private void РедактироватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int selectedRow = dataGridView1.SelectedCells[0].RowIndex;
-            textBox1.Text = studentList[selectedRow].Name;
-            textBox2.Text = studentList[selectedRow].Surname;
-            numericUpDown2.Value = studentList[selectedRow].BookNumber;
-            numericUpDown1.Value = studentList[selectedRow].Age;
-            textBox5.Text = studentList[selectedRow].Group;
-            button1.Visible = false;
-            button1.Enabled = false;
-            button2.Visible = true;
-            button2.Enabled = true;
+            try
+            {
+                int selectedRow = dataGridView1.SelectedCells[0].RowIndex;
+                textBox1.Text = studentList[selectedRow].Name;
+                textBox2.Text = studentList[selectedRow].Surname;
+                numericUpDown2.Value = studentList[selectedRow].BookNumber;
+                numericUpDown1.Value = studentList[selectedRow].Age;
+                textBox5.Text = studentList[selectedRow].Group;
+                button1.Visible = false;
+                button1.Enabled = false;
+                button2.Visible = true;
+                button2.Enabled = true;
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
